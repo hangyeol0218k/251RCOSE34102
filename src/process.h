@@ -17,7 +17,7 @@ typedef struct _Process
     int arrival_time;
     int burst_time;
     IO_process* io_list;
-    int priority;
+    int priority;           // priority 값이 작을수록 우선순위가 높다고 가정
     int waiting_time;
     int turnaround_time;
 } Process;
