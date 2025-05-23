@@ -1,5 +1,6 @@
+// Written with assistance from ChatGPT-4o, May 2025
 {
-  "name": "code341-2025-1R",
+  "name": "cose341-2025-1R",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
@@ -8,11 +9,11 @@
     "terminal.integrated.defaultProfile.linux": "bash"
   },
   "extensions": [
-    "ms-vscode.cpptools",           // C/C++ 언어 지원
-    "ms-vscode.cmake-tools",        // CMake 프로젝트 관리
+    "ms-vscode.cpptools",
+    "ms-vscode.cmake-tools",
     "ms-vscode.cpptools-extension-pack"
   ],
-  "postCreateCommand": "make || true", // 자동 빌드 시도 (실패해도 무시)
+  "postCreateCommand": "make || true",
   "mounts": [
     "source=${localWorkspaceFolder},target=/workspace,type=bind"
   ],

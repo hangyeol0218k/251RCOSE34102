@@ -1,3 +1,5 @@
+# Written with assistance from ChatGPT-4o, May 2025
+
 CC = gcc
 CFLAGS = -Wall -g
 

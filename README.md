@@ -1,2 +1,2 @@
 # 251RCOSE34102
-For OS class (COSE341, 25-1R)
+For OS Term Project (COSE341, 25-1R)

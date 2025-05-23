@@ -15,21 +15,21 @@ int main()
     printf("[Initial Processes]\n");
     print_process_list(process_data);
 
-    // FCFS
+    // ---- ---- ---- ---- FCFS ---- ---- ---- ----
     Process_data* data_fcfs = copy_pdata(process_data);
     nonpreemptive_schedule(data_fcfs, NUM_OF_PROCESS, 0);
 
     printf("\n[After FCFS]\n");
     print_process_list(data_fcfs);
 
-    // SJF
+    // ---- ---- ---- ---- SJF ---- ---- ---- ----
     Process_data* data_sjf = copy_pdata(process_data);
     nonpreemptive_schedule(data_sjf, NUM_OF_PROCESS, 1);
 
     printf("\n[After SJF]\n");
     print_process_list(data_sjf);
 
-    // priority
+    // ---- ---- ---- ---- priority ---- ---- ---- ----
     Process_data* data_pri = copy_pdata(process_data);
     nonpreemptive_schedule(data_pri, NUM_OF_PROCESS, 2);
 
