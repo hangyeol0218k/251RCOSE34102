@@ -4,7 +4,6 @@
 #include "process.h"
 #include "config.h"
 
-void fcfs(Process_data*, Queue*);
-void priority_schedule(Process_data*, Priority_queue*);
+void nonpreemptive_schedule(Process_data*, int, int);
 
 #endif

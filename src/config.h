@@ -9,7 +9,6 @@ typedef struct _Queue
     int head; // first element의 위치
     int tail; // last element의 다음 위치
     Process** itmes;
-
 } Queue;
 
 typedef struct _Priority_queue  // index 0 ~ n-1 을 사용하는 우선순위 큐 (min heap 기반)
@@ -17,6 +16,7 @@ typedef struct _Priority_queue  // index 0 ~ n-1 을 사용하는 우선순위 �
     int max_size;   // 최대 element 개수
     int tail;       // 마지막 원소의 인덱스
     Process** items;
+    int comp;       // 비교 기준을 결정 (0: arrival time, 1: burst time, 2: priority)
 } Priority_queue;
 
 Queue* create_queue(int);
@@ -25,8 +25,9 @@ int queue_is_full(Queue*);
 void push_queue(Queue*, Process*);
 Process* pop_queue(Queue*);
 
-Priority_queue* create_pri_queue(int);
-void swap_proc(Process*, Process*);
+Priority_queue* create_pri_queue(int, int);
+int compare(Process*, Process*, int);
+void swap_proc(Process**, Process**);
 int pri_queue_is_empty(Priority_queue*);
 int pri_queue_is_full(Priority_queue*);
 void push_pri_queue(Priority_queue*, Process*);
