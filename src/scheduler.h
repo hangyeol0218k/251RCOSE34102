@@ -16,5 +16,7 @@ typedef struct _Log_list
 } Log_list;
 
 Log_list* nonpreemptive_schedule(Process_data*, int, int);
+Log_list* preemptive_schedule(Process_data*, int, int);
+Log_list* rr_schedule(Process_data*, int, int, int);
 
 #endif

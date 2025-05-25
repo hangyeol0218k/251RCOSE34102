@@ -8,7 +8,7 @@ typedef struct _Queue
     int size; // 실제 사용 가능 공간은 size-1
     int head; // first element의 위치
     int tail; // last element의 다음 위치
-    Process** itmes;
+    Process** items;
 } Queue;
 
 typedef struct _Priority_queue  // index 0 ~ n-1 을 사용하는 우선순위 큐 (min heap 기반)

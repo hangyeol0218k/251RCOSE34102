@@ -1,11 +1,55 @@
 #include "config.h"
 
+Queue* create_queue(int qsize)
+{
+    Queue* newq = (Queue*)malloc(sizeof(Queue));
+    Process** qitems = (Process**)malloc(sizeof(Process*) * qsize);
+
+    *newq = (Queue){qsize, 0, 0, qitems};
+
+    return newq;
+}
+
+int queue_is_empty(Queue* q)
+{
+    return (q->head == q->tail);
+}
+
+int queue_is_full(Queue* q)
+{
+    return ((q->tail + 1)%(q->size) == q->head);
+}
+
+void push_queue(Queue* q, Process* proc)
+{
+    if (queue_is_full(q)) {
+        fprintf(stderr, "[Error] Queue is Full!\n");
+        return;
+    }
+    q->items[q->tail] = proc;
+    q->tail = (q->tail + 1)%(q->size);
+    
+    return;
+}
+
+Process* pop_queue(Queue* q)
+{
+    if (queue_is_empty(q)) {
+        fprintf(stderr, "[Error] Queue is Empty!\n");
+        return NULL;
+    }
+
+    Process* proc = q->items[q->head];
+    q->head = (q->head + 1)%(q->size);
+    return proc;
+}
+
 Priority_queue* create_pri_queue(int qsize, int comp)
 {
     Priority_queue* newq = (Priority_queue*)malloc(sizeof(Priority_queue));
     Process** qitems = (Process**)malloc(sizeof(Process*) * (qsize));
 
-    *newq = (Priority_queue){qsize, -1, qitems, comp}; // tail = -1 (데이터 없음을 표시)
+    *newq = (Priority_queue){qsize, -1, qitems, comp}; // initial: tail = -1 (데이터 없음을 표시)
 
     return newq;
 }
@@ -29,7 +73,7 @@ int compare(Process* a, Process* b, int key)    // a가 b보다 우선순위가 
             return a->arrival_time < b->arrival_time ? 1 : 0;   // priority가 같은 경우 먼저 도착한 것이 우선순위 높음
         else return 0;
     default:
-        printf("[Error] Wrong KEY for compare function\n");
+        fprintf(stderr, "[Error] Wrong KEY for compare function\n");
         return -1;
     }
 }
@@ -54,7 +98,7 @@ int pri_queue_is_full(Priority_queue* q)
 void push_pri_queue(Priority_queue* pri_queue, Process* proc)
 {
     if(pri_queue->tail >= pri_queue->max_size - 1) {
-        printf("[ERROR] Priority queue is Full!\n");
+        fprintf(stderr, "[Error] Queue is Full!\n");
         return;
     }
 
@@ -74,7 +118,7 @@ void push_pri_queue(Priority_queue* pri_queue, Process* proc)
 Process* pop_pri_queue(Priority_queue* pri_queue)
 {
     if(pri_queue->tail < 0) {
-        printf("[ERROR] Priority queue is Empty!\n");
+        fprintf(stderr, "[Error] Queue is Empty!\n");
         return NULL;
     }
 
