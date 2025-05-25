@@ -5,7 +5,7 @@ CFLAGS = -Wall -g
 
 TARGET = main
 
-OBJS = main.o process.o config.o scheduler.o
+OBJS = main.o process.o config.o scheduler.o evaluation.o
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)

@@ -29,8 +29,9 @@ typedef struct _Process_data
     int remain_num;
 } Process_data;
 
-Process_data* create_process(int, int, int);
+Process_data* create_process(int, int, int, int);
 void print_process_list(Process_data*);
+void print_process_list2(Process_data*, Process_data*);
 Process_data* copy_pdata(Process_data*);
 
 #endif

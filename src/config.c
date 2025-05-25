@@ -3,25 +3,26 @@
 Priority_queue* create_pri_queue(int qsize, int comp)
 {
     Priority_queue* newq = (Priority_queue*)malloc(sizeof(Priority_queue));
-    int max_size = sizeof(Process*) * (qsize);
-    Process** qitems = (Process**)malloc(max_size);
+    Process** qitems = (Process**)malloc(sizeof(Process*) * (qsize));
 
-    *newq = (Priority_queue){max_size, -1, qitems, comp}; // tail = -1 (데이터 없음을 표시)
+    *newq = (Priority_queue){qsize, -1, qitems, comp}; // tail = -1 (데이터 없음을 표시)
 
     return newq;
 }
 
-int compare(Process* a, Process* b, int key)    // a가 b보다 우선순위가 높은지
+int compare(Process* a, Process* b, int key)    // a가 b보다 우선순위가 높은지 판단하는 함수
 {
     switch (key)
     {
     case 0: // arrival time (FCFS)
         return a->arrival_time < b->arrival_time ? 1 : 0;
+
     case 1: // burst time (SJF)
         if(a->burst_time < b->burst_time) return 1;
         else if(a->burst_time == b->burst_time)
             return a->arrival_time < b->arrival_time ? 1 : 0;   // burst time이 같은 경우 먼저 도착한 것이 우선순위 높음
         else return 0;
+        
     case 2: // priority
         if(a->priority < b->priority) return 1;
         else if(a->priority == b->priority)
@@ -62,7 +63,6 @@ void push_pri_queue(Priority_queue* pri_queue, Process* proc)
 
     Process** qitems = pri_queue->items;    // 포인터 연산을 줄이기 위한 임시 변수
     qitems[t] = proc;
-    // printf("t : %d, parent: %d, current: %d\n", t, parent, qitems[t]->pid);
     while (t != 0 && compare(qitems[t], qitems[parent], pri_queue->comp))    // root에 도달하지 않았고, parent보다 우선순위가 높으면
     {
         swap_proc(&qitems[t], &qitems[parent]);
